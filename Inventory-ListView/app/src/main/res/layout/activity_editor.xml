@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Layout for the editor -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditorActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_margin">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Product Image -->
+            <ImageView
+                android:id="@+id/image_view_product"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/distance_m"
+                android:adjustViewBounds="true"
+                android:maxWidth="@dimen/image_max_width"
+                android:scaleType="fitCenter"
+                android:src="@drawable/smartphone_default"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_product_cpu"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/edit_product_name" />
+
+            <!-- Field: Product Name -->
+            <EditText
+                android:id="@+id/edit_product_name"
+                style="@style/ValueStyle"
+                android:layout_marginLeft="@dimen/distance_xl"
+                android:hint="@string/hint_product_name"
+                android:inputType="textCapWords"
+                app:layout_constraintLeft_toRightOf="@+id/image_view_product"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <!-- Field: CPU -->
+            <EditText
+                android:id="@+id/edit_product_cpu"
+                style="@style/ValueStyleBelowTop"
+                android:hint="@string/hint_product_cpu"
+                android:inputType="textCapWords"
+                app:layout_constraintLeft_toLeftOf="@+id/edit_product_name"
+                app:layout_constraintRight_toRightOf="@+id/edit_product_name"
+                app:layout_constraintTop_toBottomOf="@+id/edit_product_name" />
+
+            <!-- Label: Operating System -->
+            <TextView
+                android:id="@+id/text_view_label_os"
+                style="@style/LabelStyle"
+                android:layout_marginLeft="@dimen/distance_s"
+                android:text="@string/category_operating_system"
+                app:layout_constraintBottom_toBottomOf="@+id/spinner_operating_system"
+                app:layout_constraintLeft_toLeftOf="@+id/edit_product_name"
+                app:layout_constraintTop_toTopOf="@+id/spinner_operating_system" />
+
+            <!-- Label: Price -->
+            <TextView
+                android:id="@+id/text_view_label_price"
+                style="@style/LabelStyle"
+                android:text="@string/category_price"
+                app:layout_constraintBaseline_toBaselineOf="@+id/edit_product_price"
+                app:layout_constraintLeft_toLeftOf="@+id/text_view_label_os" />
+
+            <!-- Label: Quantity -->
+            <TextView
+                android:id="@+id/text_view_label_quantity"
+                style="@style/LabelStyle"
+                android:text="@string/category_quantity"
+                app:layout_constraintBaseline_toBaselineOf="@+id/text_view_quantity"
+                app:layout_constraintLeft_toLeftOf="@+id/text_view_label_os" />
+
+            <!-- Spinner: Operating System -->
+            <Spinner
+                android:id="@+id/spinner_operating_system"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/distance_xxl"
+                android:layout_marginTop="@dimen/distance_xl"
+                android:spinnerMode="dropdown"
+                app:layout_constraintLeft_toRightOf="@+id/text_view_label_os"
+                app:layout_constraintRight_toRightOf="@+id/edit_product_name"
+                app:layout_constraintTop_toBottomOf="@+id/edit_product_cpu" />
+
+            <!-- Field: Price -->
+            <EditText
+                android:id="@+id/edit_product_price"
+                style="@style/ValueStyleBelowTop"
+                android:hint="@string/hint_product_price"
+                android:inputType="numberDecimal"
+                app:layout_constraintLeft_toLeftOf="@+id/spinner_operating_system"
+                app:layout_constraintRight_toRightOf="@+id/edit_product_name"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_operating_system" />
+
+            <!-- Label: Currency -->
+            <TextView
+                android:id="@+id/text_view_label_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/distance_m"
+                android:text="@string/currency_default"
+                android:textAppearance="?android:textAppearanceSmall"
+                app:layout_constraintBaseline_toBaselineOf="@+id/edit_product_price"
+                app:layout_constraintRight_toRightOf="@+id/edit_product_price" />
+
+            <!-- Decrease Quantity -->
+            <Button
+                android:id="@+id/button_decrease_qty"
+                android:layout_width="@dimen/square_button"
+                android:layout_height="@dimen/square_button"
+                android:layout_marginTop="@dimen/distance_xl"
+                android:text="@string/sign_minus"
+                app:layout_constraintLeft_toLeftOf="@+id/spinner_operating_system"
+                app:layout_constraintTop_toBottomOf="@+id/edit_product_price" />
+
+            <!-- Increase Quantity -->
+            <Button
+                android:id="@+id/button_increase_qty"
+                android:layout_width="@dimen/square_button"
+                android:layout_height="@dimen/square_button"
+                android:text="@string/sign_plus"
+                app:layout_constraintRight_toRightOf="@+id/edit_product_name"
+                app:layout_constraintTop_toTopOf="@+id/button_decrease_qty" />
+
+            <!-- Value of Quantity -->
+            <TextView
+                android:id="@+id/text_view_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAppearance="?android:textAppearanceMedium"
+                app:layout_constraintBottom_toBottomOf="@+id/button_decrease_qty"
+                app:layout_constraintLeft_toLeftOf="@+id/button_decrease_qty"
+                app:layout_constraintRight_toRightOf="@+id/edit_product_name"
+                app:layout_constraintTop_toTopOf="@+id/button_decrease_qty" />
+
+            <!-- Display info on how to order from the supplier -->
+            <TextView
+                android:id="@+id/text_view_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="@dimen/distance_xl"
+                android:gravity="center"
+                android:text="@string/how_to_order_from_supplier"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/listItemTextColorSecondary"
+                android:textStyle="italic"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_decrease_qty" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+    <!-- Button to Email to supplier -->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
+
+</RelativeLayout>
