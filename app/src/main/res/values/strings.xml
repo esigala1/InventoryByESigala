@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Name for the application [CHAR LIMIT=12] -->
+    <string name="app_name">Inventory ListView</string>
+
+    <!-- Toast message for product sold. -->
+    <string name="msg_item_sold">\"<xliff:g id="product_name" example="LG G2">%s</xliff:g>\" sold</string>
+
+    <!-- Toast message when a product can not be sold. -->
+    <string name="msg_item_out_of_stock">\"<xliff:g id="product_name" example="LG G2">%s</xliff:g>\" is out of stock...</string>
+
+    <!-- Label for overflow menu option that inserts fake product data into the app [CHAR LIMIT=20] -->
+    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+
+    <!-- Label for overflow menu option that deletes all product data in the app [CHAR LIMIT=20] -->
+    <string name="action_delete_all_entries">Delete All Products</string>
+
+    <!-- Title text for the empty view, which describes the empty inventory image [CHAR LIMIT=50] -->
+    <string name="empty_view_title_text">The inventory is empty...</string>
+
+    <!-- Subtitle text for the empty view that prompts the user to add a product [CHAR LIMIT=50] -->
+    <string name="empty_view_subtitle_text">Get started by adding a product</string>
+
+    <!-- Title for the activity to add a new product [CHAR LIMIT=20] -->
+    <string name="editor_activity_title_new_product">Add a Product</string>
+
+    <!-- Title for the activity to edit an existing product [CHAR LIMIT=20] -->
+    <string name="editor_activity_title_edit_product">Edit Product</string>
+
+    <!-- Label for editor menu option to save product and leave editor [CHAR LIMIT=20] -->
+    <string name="action_save">Save</string>
+
+    <!-- Label for editor overflow menu option that deletes the current product [CHAR LIMIT=20] -->
+    <string name="action_delete">Delete</string>
+
+    <!-- Toast message in editor when cannot save a product (missing values) [CHAR LIMIT=NONE] -->
+    <string name="editor_fill_in_all_values">Please fill in all the values properly before press the save button</string>
+
+    <!-- Toast message in editor when new product has been successfully inserted [CHAR LIMIT=NONE] -->
+    <string name="editor_insert_product_successful">Product saved</string>
+
+    <!-- Toast message in editor when new product has failed to be inserted [CHAR LIMIT=NONE] -->
+    <string name="editor_insert_product_failed">Error with saving product</string>
+
+    <!-- Toast message in editor when current product was successfully updated [CHAR LIMIT=NONE] -->
+    <string name="editor_update_product_successful">Product updated</string>
+
+    <!-- Toast message in editor when current product has failed to be updated [CHAR LIMIT=NONE] -->
+    <string name="editor_update_product_failed">Error with updating product</string>
+
+    <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+
+    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
+    <string name="discard">Discard</string>
+
+    <!-- Dialog button text for the option to keep editing the current product [CHAR LIMIT=20] -->
+    <string name="keep_editing">Keep Editing</string>
+
+    <!-- Toast message in editor when current product was successfully deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_product_successful">Product deleted</string>
+
+    <!-- Toast message in editor when current product has failed to be deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_product_failed">Error with deleting product</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current product [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Delete this product?</string>
+
+    <!-- Dialog message to ask the user to confirm deleting all products [CHAR LIMIT=NONE] -->
+    <string name="delete_all_dialog_msg">Delete all products?</string>
+
+    <!-- Dialog button text for the option to confirm deleting the current product [CHAR LIMIT=20] -->
+    <string name="delete">Delete</string>
+
+    <!-- Dialog button text for the option to cancel deletion of the current product [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
+
+    <!-- Label for operating system information in the editor [CHAR LIMIT=30] -->
+    <string name="category_operating_system">OS</string>
+
+    <!-- Label for price information in the editor [CHAR LIMIT=30] -->
+    <string name="category_price">Price</string>
+
+    <!-- Label for quantity information in the editor [CHAR LIMIT=30] -->
+    <string name="category_quantity">QTY</string>
+
+    <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_product_name">Name</string>
+
+    <!-- Text hint for cpu field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_product_cpu">CPU</string>
+
+    <!-- Text hint for price field in the editor [CHAR LIMIT=30] -->
+    <string name="hint_product_price">Price</string>
+
+    <!-- Product's price default currency (EUR) [CHAR LIMIT=5] -->
+    <string name="currency_default">EUR</string>
+
+    <!-- Plus sign to increase quantity [CHAR LIMIT=1] -->
+    <string name="sign_plus">+</string>
+
+    <!-- Minus sign to decrease quantity [CHAR LIMIT=1] -->
+    <string name="sign_minus">-</string>
+
+    <!-- Label for dropdown menu option if the product's OS is unknown [CHAR LIMIT=20] -->
+    <string name="os_unknown">Unknown</string>
+
+    <!-- Label for dropdown menu option if the product has Android OS [CHAR LIMIT=20] -->
+    <string name="os_android">Android</string>
+
+    <!-- Label for dropdown menu option if the product has iOS OS [CHAR LIMIT=20] -->
+    <string name="os_ios">iOS</string>
+
+    <!-- Label for the product's quantity if it is not zero [CHAR LIMIT=20] -->
+    <string name="quantity">QTY</string>
+
+    <!-- Label for the product's quantity if it is zero [CHAR LIMIT=20] -->
+    <string name="out_of_stock">Out of stock</string>
+
+    <!-- Toast message when the quantity is zero and we click to decrease the stock. -->
+    <string name="msg_negative_stock">You cannot have less than 0 products</string>
+
+    <!-- TextView with info no how to order from the supplier -->
+    <string name="how_to_order_from_supplier">Note: To order from the supplier click on the
+        \"e-mail\" button on the right bottom of the screen.</string>
+
+    <!-- The subject of the email. -->
+    <string name="email_subject">
+        Order \"<xliff:g id="product_name" example="LG G2">%s</xliff:g>\"
+    </string>
+
+    <!-- The text of the email. -->
+    <string name="email_text">
+        Hello,
+        \n\nI would like to order
+        <xliff:g id="quantity" example="2">%d</xliff:g> pieces of the
+        product \"<xliff:g id="product_name" example="LG G2">%s</xliff:g>\".
+        \n\nThanks in advance\n
+    </string>
+
+    <!-- Toast message for selecting successfully an image from the device. -->
+    <string name="msg_image_selected_successfully">Image file selected successfully.</string>
+
+    <!-- Toast message for selecting unsuccessfully an image from the device. -->
+    <string name="msg_image_selected_unsuccessfully">Could not get the image file.</string>
+
+    <!-- Toast message for canceling the image picker. -->
+    <string name="msg_image_picker_canceled">Image picker canceled.</string>
+
+</resources>
