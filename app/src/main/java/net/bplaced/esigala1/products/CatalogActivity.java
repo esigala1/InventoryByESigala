@@ -13,13 +13,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import net.bplaced.esigala1.products.data.BitmapUtility;
 import net.bplaced.esigala1.products.data.ProductContract.ProductEntry;
@@ -28,7 +28,8 @@ import net.bplaced.esigala1.products.data.ProductContract.ProductEntry;
  * Displays list of products that were entered and stored in the app.
  */
 public class CatalogActivity extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<Cursor>{
+        implements LoaderManager.LoaderCallbacks<Cursor>,
+        ProductAdapter.ProductRVAdapterOnClickHandler {
 
     /** Tag for the log messages. */
     private static final String LOG_TAG = "DEBUGGING " + CatalogActivity.class.getSimpleName();
@@ -39,8 +40,10 @@ public class CatalogActivity extends AppCompatActivity
     /** Button to add a new product **/
     FloatingActionButton fabAddNewProduct;
 
-    /** Adapter for the ListView */
-    ProductAdapter mProductAdapter;
+    private ProductAdapter mProductAdapter;
+    private RecyclerView mRecyclerView;
+
+    public static View mEmptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,72 +60,51 @@ public class CatalogActivity extends AppCompatActivity
             }
         });
 
-        // Find the ListView which will be populated with the product data
-        ListView productListView = (ListView) findViewById(R.id.list_view);
+        /**
+         * A view to display as the empty view.
+         */
+        mEmptyView = findViewById(R.id.empty_view);
 
-        // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
-        View emptyView = findViewById(R.id.empty_view);
-        productListView.setEmptyView(emptyView);
+        /*
+         * Using findViewById, we get a reference to our RecyclerView from xml. This allows us to
+         * do things like set the adapter of the RecyclerView and toggle the visibility.
+         */
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        // Setup an Adapter to create a list item for each row of product data in the Cursor.
-        // There is no product data yet (until the loader finishes) so pass in null for the Cursor.
-        mProductAdapter = new ProductAdapter(this, null);
-        productListView.setAdapter(mProductAdapter);
+        /*
+         * A LinearLayoutManager is responsible for measuring and positioning item views within a
+         * RecyclerView into a linear list. This means that it can produce either a horizontal or
+         * vertical list depending on which parameter you pass in to the LinearLayoutManager
+         * constructor. In our case, we want a vertical list, so we pass in the constant from the
+         * LinearLayoutManager class for vertical lists, LinearLayoutManager.VERTICAL.
+         *
+         * There are other LayoutManagers available to display your data in uniform grids,
+         * staggered grids, and more! See the developer documentation for more details.
+         *
+         * The third parameter (shouldReverseLayout) should be true if you want to reverse your
+         * layout. Generally, this is only true with horizontal lists that need to support a
+         * right-to-left layout.
+         */
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        // Setup the item click listener
-        productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.v(LOG_TAG, "Clicked item at position " + position);
-                // Create new intent to go to {@link EditorActivity}
-                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+        /*
+         * Add decoration between the items of the RecyclerView.
+         */
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-                // Form the content URI that represents the specific product that was clicked on,
-                // by appending the "id" (passed as input to this method) onto the
-                // {@link ProductEntry#CONTENT_URI}.
-                // For example, the URI would be "content://net.bplaced.esigala1.products/products/2"
-                // if the product with ID 2 was clicked on.
-                Uri currentProductUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, id);
+        /*
+         * Use this setting to improve performance if you know that changes in content do not
+         * change the child layout size in the RecyclerView
+         */
+        mRecyclerView.setHasFixedSize(true);
 
-                // Set the URI on the data field of the intent.
-                intent.setData(currentProductUri);
+        /*
+         * The RecyclerViewAdapter is responsible for linking our data with the Views that
+         * will end up displaying our data.
+         */
+        mProductAdapter = new ProductAdapter(this, this);
 
-                // Launch the {@link EditorActivity} to display the data for the current product.
-                startActivity(intent);
-            }
-        });
-
-        // Set the OnScroll listener to hide the FAB button when the list is scrolled to the bottom.
-        productListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                switch (view.getId()){
-                    case R.id.list_view:
-                        // If all the items of the list are more than the visible items, then...
-                        if (totalItemCount > visibleItemCount){
-                            // Determine if the last item is fully visible.
-                            final int lastItem = firstVisibleItem + visibleItemCount;
-                            // If the last item is visible, then hide the fab button.
-                            if(lastItem == totalItemCount)
-                            {
-                                fabAddNewProduct.setVisibility(View.INVISIBLE);
-                            }
-                            else
-                            {
-                                fabAddNewProduct.setVisibility(View.VISIBLE);
-                            }
-                        }
-                        return;
-                    default:
-                        Log.v(LOG_TAG, "No list find with id = " + view.getId());
-                        return;
-                }
-            }
-        });
+        mRecyclerView.setAdapter(mProductAdapter);
 
         // Kick off the loader
         getLoaderManager().initLoader(PET_LOADER, null, this);
@@ -245,7 +227,7 @@ public class CatalogActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        // Update {@link ProductAdapter} with this new cursor containing updated product data.
+        // Update {@link ProductLVAdapter} with this new cursor containing updated product data.
         mProductAdapter.swapCursor(data);
     }
 
@@ -254,4 +236,33 @@ public class CatalogActivity extends AppCompatActivity
         // Callback called when the data needs to be deleted.
         mProductAdapter.swapCursor(null);
     }
+
+    /**********************************************************************************************
+     * Implementation for the {@link ProductAdapter.ProductRVAdapterOnClickHandler} interface
+     *********************************************************************************************/
+
+    /**
+     * This callback is invoked when you click on an item in the list.
+     **/
+    @Override
+    public void onClickItem(int position, int productID) {
+        Log.v(LOG_TAG, "Clicked item at position " + position + " Product ID = " + productID);
+        // Create new intent to go to {@link EditorActivity}
+        Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+
+        // Form the content URI that represents the specific product that was clicked on,
+        // by appending the "id" (passed as input to this method) onto the
+        // {@link ProductEntry#CONTENT_URI}.
+        // For example, the URI would be "content://net.bplaced.esigala1.products/products/2"
+        // if the product with ID 2 was clicked on.
+        Uri currentProductUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, productID);
+
+        // Set the URI on the data field of the intent.
+        intent.setData(currentProductUri);
+
+        // Launch the {@link EditorActivity} to display the data for the current product.
+        startActivity(intent);
+    }
+
+
 }
