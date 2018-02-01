@@ -1,0 +1,36 @@
+<resources>
+    <!-- Common margin value used throughout the app -->
+    <dimen name="activity_margin">16dp</dimen>
+
+    <!-- Margin around the floating action button in CatalogActivity -->
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Small distance between views -->
+    <dimen name="distance_s">4dp</dimen>
+
+    <!-- Medium distance between views -->
+    <dimen name="distance_m">8dp</dimen>
+
+    <!-- Large distance between views -->
+    <dimen name="distance_l">12dp</dimen>
+
+    <!-- XLarge distance between views -->
+    <dimen name="distance_xl">20dp</dimen>
+
+    <!-- XXLarge distance between views -->
+    <dimen name="distance_xxl">45dp</dimen>
+
+    <!-- Height of each list item -->
+    <dimen name="list_item_height">50dp</dimen>
+
+    <!-- Height of a spinner -->
+    <dimen name="spinner_height">48dp</dimen>
+
+    <!-- Dimensions of a square button -->
+    <dimen name="square_button">50dp</dimen>
+
+    <!-- Max width of the Image -->
+    <dimen name="image_max_width">80dp</dimen>
+
+</resources>
+

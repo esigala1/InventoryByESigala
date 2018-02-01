@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Layout for a single list item in the list of products -->
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/activity_margin">
+
+    <!-- Product Name -->
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="@dimen/activity_margin"
+        android:layout_marginTop="0dp"
+        android:fontFamily="sans-serif-medium"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/listItemTextColorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/product_sale"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Product Name" />
+
+    <!-- Sale -->
+    <!-- Important: Disable focusable & focusableInTouchMode so that the list item can be clicked!! -->
+    <Button
+        android:id="@+id/product_sale"
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"
+        android:background="@drawable/ic_sale"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Price -->
+    <TextView
+        android:id="@+id/product_price"
+        style="@style/ListItemSubTextStyle"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:text="Price" />
+
+    <!-- Separator between Price and Quantity -->
+    <TextView
+        android:id="@+id/separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_margin"
+        android:text="-"
+        app:layout_constraintLeft_toRightOf="@id/product_price"
+        app:layout_constraintTop_toTopOf="@id/product_price"/>
+
+    <!-- Quantity -->
+    <TextView
+        android:id="@+id/product_quantity"
+        style="@style/ListItemSubTextStyle"
+        android:layout_marginLeft="@dimen/activity_margin"
+        app:layout_constraintLeft_toRightOf="@id/separator"
+        app:layout_constraintTop_toTopOf="@id/product_price"
+        tools:text="QTY" />
+
+</android.support.constraint.ConstraintLayout>
